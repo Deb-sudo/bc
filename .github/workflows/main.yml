@@ -3,7 +3,7 @@ on: [pull_request, push, workflow_dispatch]
 jobs:
   scan:
     name: gitleaks
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 # Explicitly specify the Ubuntu version
     steps:
       - uses: actions/checkout@v3
         with:
@@ -12,7 +12,6 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         with:
           args: --config=.gitleaks.toml --no-fail
-        continue-on-error: true  # Ensure the workflow continues even if secrets are found
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
