@@ -11,8 +11,8 @@ jobs:
       - name: Run Gitleaks Scan
         uses: gitleaks/gitleaks-action@v2
         with:
-          config: .gitleaks.toml  # Optional: If you have a custom configuration file
-          fail_on_new_secrets: false # Ensures the build doesn't fail on detecting secrets
+          args: --config=.gitleaks.toml --no-fail
         continue-on-error: true  # Ensure the workflow continues even if secrets are found
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
